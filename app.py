@@ -302,53 +302,53 @@ def show_main():
                 st.session_state.device_expanders.pop(device_id, None)
                 st.rerun()
 
-# === DIGITAL ACTIVITIES ===
+    # === DIGITAL ACTIVITIES ===
 
-st.markdown("""
-    <h3 style="margin-top: 25px; color:#1d3557;">🎓 Digital Activities</h3>
-    <p>
-        Estimate how many hours per day you spend on each activity during a typical 8-hour study or work day. As a reference, users submit approximately 15 to 20 queries during a half-hour interaction with an AI assistant.
-        <br>
-        <b style="color: #40916c;">You may exceed 8 hours if multitasking</b> 
-        <span style="color: #495057;">(e.g., watching a lecture while writing notes).</span>
-    </p>
-""", unsafe_allow_html=True)
+    st.markdown("""
+        <h3 style="margin-top: 25px; color:#1d3557;">🎓 Digital Activities</h3>
+        <p>
+            Estimate how many hours per day you spend on each activity during a typical 8-hour study or work day. As a reference, users submit approximately 15 to 20 queries during a half-hour interaction with an AI assistant.
+            <br>
+            <b style="color: #40916c;">You may exceed 8 hours if multitasking</b> 
+            <span style="color: #495057;">(e.g., watching a lecture while writing notes).</span>
+        </p>
+    """, unsafe_allow_html=True)
 
-role = st.session_state.role
-ore_dict = {}
-digital_total = 0
-col1, col2 = st.columns(2)
+    role = st.session_state.role
+    ore_dict = {}
+    digital_total = 0
+    col1, col2 = st.columns(2)
 
-# Sliders con -- Select --
-for i, (act, ef) in enumerate(activity_factors[role].items()):
-    with (col1 if i % 2 == 0 else col2):
-        ore = st.select_slider(
-            f"{act} (h/day)",
-            options=["-- Select option --"] + [x * 0.5 for x in range(17)],
-            value="-- Select option --",
-            key=f"slider_{act}"
-        )
-        ore_dict[act] = ore
+    # Sliders con -- Select --
+    for i, (act, ef) in enumerate(activity_factors[role].items()):
+        with (col1 if i % 2 == 0 else col2):
+            ore = st.select_slider(
+                f"{act} (h/day)",
+                options=["-- Select option --"] + [x * 0.5 for x in range(17)],
+                value="-- Select option --",
+                key=f"slider_{act}"
+            )
+            ore_dict[act] = ore
 
-# Parte 2: Email, cloud, printing, connectivity
-st.markdown("""
-    <hr style="margin-top: 30px; margin-bottom: 20px;">
-    <p style="font-size: 17px; line-height: 1.5;">
-        Now tell us more about your habits related to <b style="color: #40916c;">email, cloud, printing and connectivity</b>.
-    </p>
-""", unsafe_allow_html=True)
+    # Parte 2: Email, cloud, printing, connectivity
+    st.markdown("""
+        <hr style="margin-top: 30px; margin-bottom: 20px;">
+        <p style="font-size: 17px; line-height: 1.5;">
+            Now tell us more about your habits related to <b style="color: #40916c;">email, cloud, printing and connectivity</b>.
+        </p>
+    """, unsafe_allow_html=True)
 
-email_opts = ["-- Select option --", "1–10", "11–20", "21–30", "31–40", "> 40"]
-cloud_opts = ["-- Select option --", "<5GB", "5–20GB", "20–50GB", "50–100GB"]
+    email_opts = ["-- Select option --", "1–10", "11–20", "21–30", "31–40", "> 40"]
+    cloud_opts = ["-- Select option --", "<5GB", "5–20GB", "20–50GB", "50–100GB"]
 
-email_plain = st.selectbox("Emails (no attachments)", email_opts, index=0)
-email_attach = st.selectbox("Emails (with attachments)", email_opts, index=0)
-cloud = st.selectbox("Cloud storage used", cloud_opts, index=0)
+    email_plain = st.selectbox("Emails (no attachments)", email_opts, index=0)
+    email_attach = st.selectbox("Emails (with attachments)", email_opts, index=0)
+    cloud = st.selectbox("Cloud storage used", cloud_opts, index=0)
 
-wifi = st.slider("Estimated daily Wi-Fi connection time", 0.0, 8.0, 4.0, 0.5)
-pages = st.number_input("Printed pages per day", 0, 100, 0)
+    wifi = st.slider("Estimated daily Wi-Fi connection time", 0.0, 8.0, 4.0, 0.5)
+    pages = st.number_input("Printed pages per day", 0, 100, 0)
 
-idle = st.radio("When you're not using your computer...", ["I turn it off", "I leave it on (idle mode)", "I don’t have a computer"])
+    idle = st.radio("When you're not using your computer...", ["I turn it off", "I leave it on (idle mode)", "I don’t have a computer"])
 
 
 
@@ -750,5 +750,6 @@ elif st.session_state.page == "main":
     show_main()
 elif st.session_state.page == "results":
     show_results()
+
 
 
